@@ -62,6 +62,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java实现经典排序算法（插入排序）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/09/Java实现经典排序算法（插入排序）/" class="article-date">
+  <time datetime="2019-03-09T15:01:54.000Z" itemprop="datePublished">2019-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/09/Java实现经典排序算法（插入排序）/">Java实现经典排序算法（插入排序）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>写在前面：</p>
+<p>​    学习Java技术。了解语法是最基础最基础的。但仅仅了解基础还远远不够。学习数据结构，不仅仅是为了应对即将到来的面试，更是为了日后的工作中，不说要求多高，起码在面对最简单的int排序的时候，不在是单纯的for循环。效率都是一点点提升出来的。</p>
+<p>​    这次先从最基本的插入排序开始。</p>
+<p>我对插入排序的理解：</p>
+<p>​    插入排序顾名思义，从开头到尾巴遍历。轮到我这个数了，我就去第一位开始看，发现合适的位置后，我就插队挤进去，我的相对位置就是这里了。</p>
+<p>​    对应的Java代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> first = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;array.length; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = array[i];</span><br><span class="line">        <span class="comment">//当前的数，从当前位置的前一个位置开始，往前走，遇到比自己大的数，将自己与大的数互换位置</span></span><br><span class="line">        <span class="keyword">int</span> j = i;</span><br><span class="line">        <span class="keyword">for</span>(; j&gt;<span class="number">0</span>; j--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(array[j]&gt;array[j-<span class="number">1</span>])&#123;</span><br><span class="line">                array[j] = array[j-<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        array[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/03/09/Java实现经典排序算法（插入排序）/" data-id="cjt1nxg0f0000a4ci3ezrpwzr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-毕设环境搭建出现的问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/03/08/毕设环境搭建出现的问题/" class="article-date">
@@ -103,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/08/毕设环境搭建出现的问题/" data-id="cjt07i8000002vycio7yc9xwv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/08/毕设环境搭建出现的问题/" data-id="cjt1nxg0u0003a4ciqa8iec6x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -144,7 +187,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/07/tittle-20190307-md/" data-id="cjt07i7zu0000vycicxr0gpgg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/07/tittle-20190307-md/" data-id="cjt1nxg0t0002a4citjo884vl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -189,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/06/hello-world/" data-id="cjt07i7zy0001vyci8gtetw2w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/06/hello-world/" data-id="cjt1nxg0s0001a4cipuao4scn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -228,6 +271,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/03/09/Java实现经典排序算法（插入排序）/">Java实现经典排序算法（插入排序）</a>
+          </li>
         
           <li>
             <a href="/2019/03/08/毕设环境搭建出现的问题/">毕设环境搭建出现的问题</a>
