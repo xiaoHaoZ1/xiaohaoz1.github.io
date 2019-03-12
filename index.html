@@ -229,6 +229,142 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/12/312植树节面试笔试记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎光临永昊的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/12/312植树节面试笔试记录/" itemprop="url">312植树节面试笔试记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-12T22:34:59+08:00">
+                2019-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>​    312植树节，怎么没有人发种子呢？^_^</p>
+<p>​    昨天公司里给我打过电话来，约好了今天上午去面试。我肯定不能迟到啊，所以今天早上六点四十五、五十、五十五三个闹铃全部安排！收拾收拾做了四十五分钟左右的车，终于是到了物联网大厦。</p>
+<p>​    坐电梯到了1109，终于是开始了面试。今天重点讲一下笔试的题目。尽管说面试是通过了，经理也没有问我太多技术上的问题。但是笔试题还是有一部分让我模糊的地方。想起多少记多少吧。</p>
+<ol>
+<li><p>String 的判等问题。代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String a = <span class="string">"10"</span>;</span><br><span class="line">    String b = String.valueOf(<span class="number">9</span>+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> x = a == b? <span class="number">1</span>:<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> y = a == <span class="string">"10"</span>?<span class="number">1</span>:<span class="number">2</span>;</span><br><span class="line">    </span><br><span class="line">    System.out.println(x);</span><br><span class="line">	System.out.println(y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正确的输出结果是2 1。</p>
+<p>虽然我写对了，但是要分析为什么。</p>
+<p>String a的值就是字符串字面量10，这个肯定没有什么疑问，必定相等。</p>
+</li>
+<li><p>类的静态方法的访问权限。代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">demo</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> a;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(a);</span><br><span class="line">	&#125;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个我是知道的。</p>
+<p>static修饰的方法都是类方法，也叫静态方法。静态方法能访问的属性，自然是只有static修饰的属性，即静态属性。不管demo类里的a是私有的还是公有的甚至是受保护的，这都不是重点，重点是它不是static修饰，方法就访问不到它。</p>
+<p>main方法看到这个a之后，会先在自己的方法体找到a，这里显然是找不到a 的，再去外面看有没有static定义的变量a，当然也没有。所以就无法得知a是什么。就会在编译期就报错。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/11/Java实现经典排序算法（快速排序）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1026,7 +1162,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1034,6 +1170,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>
