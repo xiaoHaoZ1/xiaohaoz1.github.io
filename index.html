@@ -229,6 +229,265 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/Java多线程接口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎光临永昊的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/19/Java多线程接口/" itemprop="url">简单介绍多线程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-19T21:32:38+08:00">
+                2019-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>​    我去，刚看到公众号有一篇关于网络协议的文章，想来对于http协议我也不是很熟悉，结果一看竟然是收费专栏推荐，行吧。我想先看看有没有能够白嫖的，掏钱也不是不可以，后面看下吧。</p>
+<p>​    明天也要出去面试，先写一个关于多线程接口的吧。</p>
+<p>​    本文参考<a href="https://www.cnblogs.com/wxd0108/p/5479442.html" target="_blank" rel="noopener">blog</a>(大部分都是参考人家的了嘤嘤嘤)</p>
+<ul>
+<li>线程安全：经常用来描绘一段代码。指在并发的情况下，该代码经过多线程使用，线程的调度顺序不影响任何结果。</li>
+<li>线程在Running的过程中可能会遇到阻塞的情况(Blocked)<ul>
+<li>调用join和sleep方法，sleep时间结束或被打断，join中断，IO完成都会回到Runnable状态，等待JVM调度。</li>
+<li>调用wait，使该线程处于等待池，知道notify/notifyAll方法，线程被唤醒被放到锁定池，释放同步锁使线程回到可运行状态。</li>
+<li>对Running状态的线程加同步锁使其进入锁定池，同步锁被释放进入可运行状态。</li>
+</ul>
+</li>
+<li>Thread类的yield方法可以让一个running状态的线程转入runnable。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Thread类相关方法</span></span><br><span class="line"><span class="comment">//当前线程可转让cpu控制权，让别的就绪状态线程运行</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">yield</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//暂停一段时间</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//在一个线程中调用ontherThread.join，将等待other执行完后才继续本线程。</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">join</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//后两个函数皆可以被打断</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">interrupte</span><span class="params">()</span><span class="comment">//将中断状态设置为true</span></span></span><br></pre></td></tr></table></figure>
+<p>​    线程中的异常无法通过try，catch来获取。</p>
+<p>​    jdk1.5提供了一个非常高效实用的多线程包：java.util.concurrent。</p>
+<pre><code>### 管理类###
+</code></pre><p>管理类本身不是多线程的，但提供一些机制来利用上述的工具做一些封装。</p>
+<p>ThreadPoolExecutor</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">先了解一下ExecutorService接口，开一个自己的线程池非常方便</span><br><span class="line">ExecutorService e = Executors.newSingleThreadExecutor();</span><br><span class="line">submit方法就是该接口内的。</span><br><span class="line">各个线程池都是ThreadPoolExecutor的子类，ThreadPoolExecutor又是ExecutorService的实现类。</span><br><span class="line">自己定义线程池的话，要用到ThreadPoolExecutor的构造方法，七个参数分别是：</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@param</span> corePoolSize  the number of threads to keep in the pool,</span><br><span class="line"><span class="comment">//核心池的大小，就算是空闲状态，也会保存该数量线程</span></span><br><span class="line"><span class="meta">@param</span> maximumPoolSize the maximum number of threads to allow in the pool</span><br><span class="line"><span class="comment">//线程池中线程数量的最大值，线程的增长不会超过该值。</span></span><br><span class="line"><span class="meta">@param</span> keepAliveTime when the number of threads is greater than</span><br><span class="line">the core, <span class="keyword">this</span> is the maximum time that excess idle threads will wait <span class="keyword">for</span> <span class="keyword">new</span> tasks before terminating.</span><br><span class="line"><span class="comment">//当线程池内线程数高于corePoolSize时，多余的空闲线程的存活时间。</span></span><br><span class="line"><span class="meta">@param</span> unit the time unit <span class="keyword">for</span> the &#123;<span class="meta">@code</span> keepAliveTime&#125; argument</span><br><span class="line"><span class="comment">//存活时间的单位</span></span><br><span class="line"><span class="meta">@param</span> workQueue the queue to use <span class="keyword">for</span> holding tasks before they are executed. This queue will hold only the &#123;<span class="meta">@code</span> Runnable&#125; tasks submitted by the &#123;<span class="meta">@code</span> execute&#125; method.</span><br><span class="line"><span class="comment">//线程执行前的等待队列</span></span><br><span class="line"><span class="meta">@param</span> threadFactory the factory to use when the executor creates a <span class="keyword">new</span> thread</span><br><span class="line"><span class="comment">//线程池创造线程所使用的工厂</span></span><br><span class="line"><span class="meta">@param</span> handler the handler to use when execution is blocked because the thread bounds and queue capacities are reached</span><br><span class="line"><span class="comment">//。。。  忘了哈哈哈 英语水平太受限了哈哈哈</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎光临永昊的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/19/数据结构与问题求解之递归/" itemprop="url">数据结构与问题求解之递归</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-19T15:21:34+08:00">
+                2019-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/17/随笔/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -316,6 +575,7 @@
 <p>​    骚鹏、王寅达、老高、鸿哥，他们都是很可爱的人，是我的好朋友，我珍惜的好朋友，希望我们能一直成为好朋友，即使日后再不会想见，也会记住这四年有彼此的陪伴。</p>
 <p>​    我想我还是会想你，两天的时间，微信发给你的消息都没有回应我就已经开始慌了神。就像以前爸爸妈妈下班很晚，深深的夜我自己一个在等待，等一个上楼梯或者一个电话的声音。我不敢跟你打电话，我觉得在你心里，我并没有你在我心里的分量。而且我也没有你的电话，真是个笑话，我竟然没有你的电话。该怎样忘记你，或者断了念想呢。</p>
 <p>​    钊姐真的很谢谢你，认识你真好。我也要让你知道，我这个朋友不会白交。</p>
+<p>​    或许一段时间之后，再看到这里会有另一种想法吧。</p>
 <p>​    想到这里了，就写到这里吧。不想再将这个网站的地址告诉任何人了。如果能有人看到这篇文章，我想你一定是我很信任的人。</p>
 
           
@@ -1279,266 +1539,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/09/Java实现经典排序算法（插入排序）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎光临永昊的Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/09/Java实现经典排序算法（插入排序）/" itemprop="url">Java实现经典排序算法（插入排序）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-09T23:01:54+08:00">
-                2019-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>写在前面：</p>
-<p>​    学习Java技术。了解语法是最基础最基础的。但仅仅了解基础还远远不够。学习数据结构，不仅仅是为了应对即将到来的面试，更是为了日后的工作中，不说要求多高，起码在面对最简单的int排序的时候，不在是单纯的for循环。效率都是一点点提升出来的。</p>
-<p>​    这次先从最基本的插入排序开始。</p>
-<p>我对插入排序的理解：</p>
-<p>​    插入排序顾名思义，从开头到尾巴遍历。轮到我这个数了，我就去第一位开始看，发现合适的位置后，我就插队挤进去，我的相对位置就是这里了。</p>
-<p>​    对应的Java代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> first = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;array.length; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = array[i];</span><br><span class="line">        <span class="comment">//当前的数，从当前位置的前一个位置开始，往前走，遇到比自己大的数，将自己与大的数互换位置</span></span><br><span class="line">        <span class="keyword">int</span> j = i;</span><br><span class="line">        <span class="keyword">for</span>(; j&gt;<span class="number">0</span>; j--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(array[j]&gt;array[j-<span class="number">1</span>])&#123;</span><br><span class="line">                array[j] = array[j-<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        array[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/毕设环境搭建出现的问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="欢迎光临永昊的Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/08/毕设环境搭建出现的问题/" itemprop="url">毕设环境搭建出现的问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T18:45:53+08:00">
-                2019-03-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="javax-persistence-jar-包与Hibernate冲突问题"><a href="#javax-persistence-jar-包与Hibernate冲突问题" class="headerlink" title="javax.persistence.jar 包与Hibernate冲突问题"></a>javax.persistence.jar 包与Hibernate冲突问题</h3><p>在搭建完毕HIbernate环境之后，运行项目时报了如下的错误：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.NoSuchMethodError:javax.persistence.JoinColumn.foreignKey()Ljavax/persistence/ForeignKey;</span><br></pre></td></tr></table></figure>
-<p>百度了之后，发现是由于Hibernate自己的jar包<strong>hibernate-jpa-2.1-api-1.0.0.Final.jar</strong>和Java EE中的<strong>javax.persistence.jar</strong>发生冲突，两个jar包中都存在JoinColumn类的class文件。猜测应该是Hibernate在执行过程中无法判定该使用哪个类导致。</p>
-<p>解决方式：删除掉Java EE中的jar包即可。</p>
-<blockquote>
-<p>这个包的作用是持久化，具体的说就是在实体类中进行元数据标签的作用，是ORM框架中用到的。<br>ORM框架可以通过这个元数据标签，使得实体类与数据库中的表建立映射关系。<br>例如javax.persistence.Column标识实体类中的这个属性对应于数据库中的一个字段等等。</p>
-</blockquote>
-<p>###项目无法在Tomcat服务器上启动</p>
-<p>老高从Eclipse将项目打包过来之后。通过IEDA 的import导入源选定Eclipse项目。</p>
-<p>但是项目无法在Tomcat上启动。下面记录下是如何将项目运行到Tomcat服务器上的。</p>
-<p>首先新建Tomcat Server，这个很简单，在Runconfguration里新建就行。</p>
-<p>难得是里面的配置Deployment。缺少设置的artifact。</p>
-<p>什么是artifact？</p>
-<p>是一种用于装载项目资产以便于测试，部署或者分布式软件的解决方案。例如集中编译class，存档java应用包，web程序作为目录结构或者web程序存档等。</p>
-<p>按照我的理解，就是一个存储了项目各项信息，例如引用的jar包还有项目的框架应用信息。用于部署时服务器的依据。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1589,7 +1589,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

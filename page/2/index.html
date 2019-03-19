@@ -229,6 +229,266 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/09/Java实现经典排序算法（插入排序）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎光临永昊的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/09/Java实现经典排序算法（插入排序）/" itemprop="url">Java实现经典排序算法（插入排序）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-09T23:01:54+08:00">
+                2019-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>写在前面：</p>
+<p>​    学习Java技术。了解语法是最基础最基础的。但仅仅了解基础还远远不够。学习数据结构，不仅仅是为了应对即将到来的面试，更是为了日后的工作中，不说要求多高，起码在面对最简单的int排序的时候，不在是单纯的for循环。效率都是一点点提升出来的。</p>
+<p>​    这次先从最基本的插入排序开始。</p>
+<p>我对插入排序的理解：</p>
+<p>​    插入排序顾名思义，从开头到尾巴遍历。轮到我这个数了，我就去第一位开始看，发现合适的位置后，我就插队挤进去，我的相对位置就是这里了。</p>
+<p>​    对应的Java代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">(<span class="keyword">int</span>[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> first = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;array.length; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = array[i];</span><br><span class="line">        <span class="comment">//当前的数，从当前位置的前一个位置开始，往前走，遇到比自己大的数，将自己与大的数互换位置</span></span><br><span class="line">        <span class="keyword">int</span> j = i;</span><br><span class="line">        <span class="keyword">for</span>(; j&gt;<span class="number">0</span>; j--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(array[j]&gt;array[j-<span class="number">1</span>])&#123;</span><br><span class="line">                array[j] = array[j-<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        array[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/毕设环境搭建出现的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎光临永昊的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/08/毕设环境搭建出现的问题/" itemprop="url">毕设环境搭建出现的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T18:45:53+08:00">
+                2019-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="javax-persistence-jar-包与Hibernate冲突问题"><a href="#javax-persistence-jar-包与Hibernate冲突问题" class="headerlink" title="javax.persistence.jar 包与Hibernate冲突问题"></a>javax.persistence.jar 包与Hibernate冲突问题</h3><p>在搭建完毕HIbernate环境之后，运行项目时报了如下的错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.NoSuchMethodError:javax.persistence.JoinColumn.foreignKey()Ljavax/persistence/ForeignKey;</span><br></pre></td></tr></table></figure>
+<p>百度了之后，发现是由于Hibernate自己的jar包<strong>hibernate-jpa-2.1-api-1.0.0.Final.jar</strong>和Java EE中的<strong>javax.persistence.jar</strong>发生冲突，两个jar包中都存在JoinColumn类的class文件。猜测应该是Hibernate在执行过程中无法判定该使用哪个类导致。</p>
+<p>解决方式：删除掉Java EE中的jar包即可。</p>
+<blockquote>
+<p>这个包的作用是持久化，具体的说就是在实体类中进行元数据标签的作用，是ORM框架中用到的。<br>ORM框架可以通过这个元数据标签，使得实体类与数据库中的表建立映射关系。<br>例如javax.persistence.Column标识实体类中的这个属性对应于数据库中的一个字段等等。</p>
+</blockquote>
+<p>###项目无法在Tomcat服务器上启动</p>
+<p>老高从Eclipse将项目打包过来之后。通过IEDA 的import导入源选定Eclipse项目。</p>
+<p>但是项目无法在Tomcat上启动。下面记录下是如何将项目运行到Tomcat服务器上的。</p>
+<p>首先新建Tomcat Server，这个很简单，在Runconfguration里新建就行。</p>
+<p>难得是里面的配置Deployment。缺少设置的artifact。</p>
+<p>什么是artifact？</p>
+<p>是一种用于装载项目资产以便于测试，部署或者分布式软件的解决方案。例如集中编译class，存档java应用包，web程序作为目录结构或者web程序存档等。</p>
+<p>按照我的理解，就是一个存储了项目各项信息，例如引用的jar包还有项目的框架应用信息。用于部署时服务器的依据。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/07/tittle-20190307-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -424,15 +684,7 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <p>Hello world!</p>
 
           
         
@@ -518,7 +770,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

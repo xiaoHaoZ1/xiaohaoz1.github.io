@@ -79,17 +79,14 @@
 
 
 
-<meta name="description" content="​    快速排序是一种快速的分治算法，它的平均运行时间为O(NlogN)。之所以快主要归功于非常紧凑而又高度优化的内部循环。它的最坏情况的性能是二次的，但稍加努力就能在统计避免这种性能。 ​    一方面，快速排序算法简单易懂（哈哈哈，实话讲，有些模糊），并且也能证明正确性，因为它依赖于递归（这倒不假）。另一方面，在实现算法时也极具技巧，因为在代码中微笑的改变就能造成运行时间的巨大差异。 看下代">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java实现经典排序算法（快速排序）">
-<meta property="og:url" content="http://yoursite.com/2019/03/11/Java实现经典排序算法（快速排序）/index.html">
+<meta property="og:title" content="数据结构与问题求解之递归">
+<meta property="og:url" content="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/index.html">
 <meta property="og:site_name" content="欢迎光临永昊的Blog">
-<meta property="og:description" content="​    快速排序是一种快速的分治算法，它的平均运行时间为O(NlogN)。之所以快主要归功于非常紧凑而又高度优化的内部循环。它的最坏情况的性能是二次的，但稍加努力就能在统计避免这种性能。 ​    一方面，快速排序算法简单易懂（哈哈哈，实话讲，有些模糊），并且也能证明正确性，因为它依赖于递归（这倒不假）。另一方面，在实现算法时也极具技巧，因为在代码中微笑的改变就能造成运行时间的巨大差异。 看下代">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-11T14:56:11.137Z">
+<meta property="og:updated_time" content="2019-03-19T07:21:34.261Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java实现经典排序算法（快速排序）">
-<meta name="twitter:description" content="​    快速排序是一种快速的分治算法，它的平均运行时间为O(NlogN)。之所以快主要归功于非常紧凑而又高度优化的内部循环。它的最坏情况的性能是二次的，但稍加努力就能在统计避免这种性能。 ​    一方面，快速排序算法简单易懂（哈哈哈，实话讲，有些模糊），并且也能证明正确性，因为它依赖于递归（这倒不假）。另一方面，在实现算法时也极具技巧，因为在代码中微笑的改变就能造成运行时间的巨大差异。 看下代">
+<meta name="twitter:title" content="数据结构与问题求解之递归">
 
 
 
@@ -119,13 +116,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/11/Java实现经典排序算法（快速排序）/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/">
 
 
 
 
 
-  <title>Java实现经典排序算法（快速排序） | 欢迎光临永昊的Blog</title>
+  <title>数据结构与问题求解之递归 | 欢迎光临永昊的Blog</title>
   
 
 
@@ -232,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/11/Java实现经典排序算法（快速排序）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -249,7 +246,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java实现经典排序算法（快速排序）</h1>
+          <h1 class="post-title" itemprop="name headline">数据结构与问题求解之递归</h1>
         
 
         <div class="post-meta">
@@ -261,8 +258,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-11T22:10:05+08:00">
-                2019-03-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-19T15:21:34+08:00">
+                2019-03-19
               </time>
             
 
@@ -299,11 +296,7 @@
       
 
       
-        <p>​    快速排序是一种快速的分治算法，它的平均运行时间为O(NlogN)。之所以快主要归功于非常紧凑而又高度优化的内部循环。它的最坏情况的性能是二次的，但稍加努力就能在统计避免这种性能。</p>
-<p>​    一方面，快速排序算法简单易懂（哈哈哈，实话讲，有些模糊），并且也能证明正确性，因为它依赖于递归（这倒不假）。另一方面，在实现算法时也极具技巧，因为在代码中微笑的改变就能造成运行时间的巨大差异。</p>
-<p>看下代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &gt; right)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> middleIndex = a.length/<span class="number">2</span>;<span class="comment">//基准数选择中间下标的位置</span></span><br><span class="line">	<span class="keyword">int</span> temp = a[middleIndex];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> i = left;</span><br><span class="line">    <span class="keyword">int</span> j = right;</span><br><span class="line">    <span class="keyword">while</span>(i != j) &#123;</span><br><span class="line">        <span class="keyword">while</span>(a[j] &gt;= temp &amp;&amp; i&lt;j)</span><br><span class="line">            j--;</span><br><span class="line">        <span class="keyword">while</span>(a[i] &lt;= temp &amp;&amp; i&lt;j)</span><br><span class="line">            i++;</span><br><span class="line">        <span class="comment">//当两个While语句执行完毕后，存在1、i下标的值大于基准数且j下标的值小于基准数且i&lt;j，这是最好的结果。</span></span><br><span class="line">        <span class="keyword">if</span>(i&lt;j)&#123;</span><br><span class="line">            temp = a[i];</span><br><span class="line">            a[i] = a[j];</span><br><span class="line">            a[j] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//最终将基准数归位</span></span><br><span class="line">    a[left] = a[i];</span><br><span class="line">    a[i] = temp;</span><br><span class="line">    </span><br><span class="line">    qucikSort(a, left, i-<span class="number">1</span>);</span><br><span class="line">    quickSort(a, i+<span class="number">1</span>. right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        
       
     </div>
     
@@ -327,8 +320,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/10/Java实现经典排序算法（希尔排序）/" rel="next" title="Java实现经典排序算法（希尔排序）">
-                <i class="fa fa-chevron-left"></i> Java实现经典排序算法（希尔排序）
+              <a href="/2019/03/17/随笔/" rel="next" title="317随笔">
+                <i class="fa fa-chevron-left"></i> 317随笔
               </a>
             
           </div>
@@ -337,8 +330,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/12/312植树节面试笔试记录/" rel="prev" title="312植树节面试笔试记录">
-                312植树节面试笔试记录 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/19/Java多线程接口/" rel="prev" title="简单介绍多线程">
+                简单介绍多线程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
