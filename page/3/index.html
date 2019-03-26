@@ -79,14 +79,13 @@
 
 
 
-<meta property="og:type" content="article">
-<meta property="og:title" content="数据结构与问题求解之递归">
-<meta property="og:url" content="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="欢迎光临永昊的Blog">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="欢迎光临永昊的Blog">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-19T07:21:34.261Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构与问题求解之递归">
+<meta name="twitter:title" content="欢迎光临永昊的Blog">
 
 
 
@@ -116,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/">
+  <link rel="canonical" href="http://yoursite.com/page/3/">
 
 
 
 
 
-  <title>数据结构与问题求解之递归 | 欢迎光临永昊的Blog</title>
+  <title>欢迎光临永昊的Blog</title>
   
 
 
@@ -141,7 +140,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,9 +214,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/毕设环境搭建出现的问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -246,7 +246,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据结构与问题求解之递归</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/08/毕设环境搭建出现的问题/" itemprop="url">毕设环境搭建出现的问题</a></h1>
         
 
         <div class="post-meta">
@@ -258,8 +260,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-19T15:21:34+08:00">
-                2019-03-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T18:45:53+08:00">
+                2019-03-08
               </time>
             
 
@@ -297,6 +299,25 @@
 
       
         
+          
+            <h3 id="javax-persistence-jar-包与Hibernate冲突问题"><a href="#javax-persistence-jar-包与Hibernate冲突问题" class="headerlink" title="javax.persistence.jar 包与Hibernate冲突问题"></a>javax.persistence.jar 包与Hibernate冲突问题</h3><p>在搭建完毕HIbernate环境之后，运行项目时报了如下的错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.NoSuchMethodError:javax.persistence.JoinColumn.foreignKey()Ljavax/persistence/ForeignKey;</span><br></pre></td></tr></table></figure>
+<p>百度了之后，发现是由于Hibernate自己的jar包<strong>hibernate-jpa-2.1-api-1.0.0.Final.jar</strong>和Java EE中的<strong>javax.persistence.jar</strong>发生冲突，两个jar包中都存在JoinColumn类的class文件。猜测应该是Hibernate在执行过程中无法判定该使用哪个类导致。</p>
+<p>解决方式：删除掉Java EE中的jar包即可。</p>
+<blockquote>
+<p>这个包的作用是持久化，具体的说就是在实体类中进行元数据标签的作用，是ORM框架中用到的。<br>ORM框架可以通过这个元数据标签，使得实体类与数据库中的表建立映射关系。<br>例如javax.persistence.Column标识实体类中的这个属性对应于数据库中的一个字段等等。</p>
+</blockquote>
+<p>###项目无法在Tomcat服务器上启动</p>
+<p>老高从Eclipse将项目打包过来之后。通过IEDA 的import导入源选定Eclipse项目。</p>
+<p>但是项目无法在Tomcat上启动。下面记录下是如何将项目运行到Tomcat服务器上的。</p>
+<p>首先新建Tomcat Server，这个很简单，在Runconfguration里新建就行。</p>
+<p>难得是里面的配置Deployment。缺少设置的artifact。</p>
+<p>什么是artifact？</p>
+<p>是一种用于装载项目资产以便于测试，部署或者分布式软件的解决方案。例如集中编译class，存档java应用包，web程序作为目录结构或者web程序存档等。</p>
+<p>按照我的理解，就是一个存储了项目各项信息，例如引用的jar包还有项目的框架应用信息。用于部署时服务器的依据。</p>
+
+          
+        
       
     </div>
     
@@ -313,32 +334,12 @@
       
 
       
-      
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/03/17/随笔/" rel="next" title="317随笔">
-                <i class="fa fa-chevron-left"></i> 317随笔
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/19/Java多线程接口/" rel="prev" title="简单介绍多线程">
-                简单介绍多线程 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -348,11 +349,258 @@
   </article>
 
 
+    
+      
 
-    <div class="post-spread">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/07/tittle-20190307-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎光临永昊的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/07/tittle-20190307-md/" itemprop="url">人，是一个Class。</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-07T00:51:58+08:00">
+                2019-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>​    至少，我是如此认为。</p>
+<p>​    白天，我们是public，公有的。我们会结交许多的朋友。我们有社交需求。</p>
+<p>​    黑夜，我们是protected，受保护的。我们只与亲近的人在一起。</p>
+<p>​    深夜，我们是private，私有的。我只属于我自己。</p>
+<p>​    但是，希望能有一个private的妳。</p>
+
+          
+        
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/06/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="欢迎光临永昊的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/06/hello-world/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-06T22:27:59+08:00">
+                2019-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Hello world!</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
@@ -360,10 +608,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -560,10 +804,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 

@@ -79,14 +79,17 @@
 
 
 
+<meta name="description" content="单例模式：确保一个类只有一个实例，并提供一个全局访问点来访问这个唯一实例。 Single Pattern：Ensure a class has only one instance，and provide a global point of access to it.  ​    单例类拥有一个私有构造函数，确保用户无法通过new关键字直接访问它。 ​    单例类还包含一个静态私有成员变量与静态">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构与问题求解之递归">
-<meta property="og:url" content="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/index.html">
+<meta property="og:title" content="Java设计模式之单例模式">
+<meta property="og:url" content="http://yoursite.com/2019/03/26/Java设计模式之单例模式/index.html">
 <meta property="og:site_name" content="欢迎光临永昊的Blog">
+<meta property="og:description" content="单例模式：确保一个类只有一个实例，并提供一个全局访问点来访问这个唯一实例。 Single Pattern：Ensure a class has only one instance，and provide a global point of access to it.  ​    单例类拥有一个私有构造函数，确保用户无法通过new关键字直接访问它。 ​    单例类还包含一个静态私有成员变量与静态">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-19T07:21:34.261Z">
+<meta property="og:updated_time" content="2019-03-26T08:49:26.899Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构与问题求解之递归">
+<meta name="twitter:title" content="Java设计模式之单例模式">
+<meta name="twitter:description" content="单例模式：确保一个类只有一个实例，并提供一个全局访问点来访问这个唯一实例。 Single Pattern：Ensure a class has only one instance，and provide a global point of access to it.  ​    单例类拥有一个私有构造函数，确保用户无法通过new关键字直接访问它。 ​    单例类还包含一个静态私有成员变量与静态">
 
 
 
@@ -116,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/26/Java设计模式之单例模式/">
 
 
 
 
 
-  <title>数据结构与问题求解之递归 | 欢迎光临永昊的Blog</title>
+  <title>Java设计模式之单例模式 | 欢迎光临永昊的Blog</title>
   
 
 
@@ -229,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/26/Java设计模式之单例模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -246,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据结构与问题求解之递归</h1>
+          <h1 class="post-title" itemprop="name headline">Java设计模式之单例模式</h1>
         
 
         <div class="post-meta">
@@ -258,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-19T15:21:34+08:00">
-                2019-03-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-26T15:57:06+08:00">
+                2019-03-26
               </time>
             
 
@@ -296,7 +299,20 @@
       
 
       
-        
+        <blockquote>
+<p>单例模式：确保一个类只有一个实例，并提供一个全局访问点来访问这个唯一实例。</p>
+<p>Single Pattern：Ensure a class has only one instance，and provide a global point of access to it.</p>
+</blockquote>
+<p>​    单例类拥有一个私有构造函数，确保用户无法通过new关键字直接访问它。</p>
+<p>​    单例类还包含一个静态私有成员变量与静态公有的工厂方法。该工厂方法负责检验实例的存在性并实例化自己，然后存储在静态成员变量中，确保只有一个实例被创建。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> SinglePattern;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>)</span><br><span class="line">            instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    使用静态内部类实现单例模式</p>
+<p>​    在Java语言中可以通过Initialization on Demand Holder(IoDH)技术来实现单例模式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//静态内部类</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">HolderClass</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">public</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> HolderClass.instance;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    由于静态单例对象没有作为Singleton的成员变量直接实例化，因此类加载时不会实例化Singleton，第一次调用getInstance时将加载内部类HolderClass，在该内部类中定义了一个static类型的变量instance，有Java虚拟机来保证其线程安全性，确保该成员变量只能初始化一次。getInstance方法没有任何线程锁定，性能也不会造成影响。</p>
+<h5 id="单例模式适用环境"><a href="#单例模式适用环境" class="headerlink" title="单例模式适用环境"></a>单例模式适用环境</h5><p>(1)系统只需要一个实例对象。</p>
+<p>(2)客户调用类的单个实例只允许使用一个公共访问点。</p>
+
       
     </div>
     
@@ -320,8 +336,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/17/随笔/" rel="next" title="317随笔">
-                <i class="fa fa-chevron-left"></i> 317随笔
+              <a href="/2019/03/26/Java设计模式之原型模式/" rel="next" title="Java设计模式之原型模式">
+                <i class="fa fa-chevron-left"></i> Java设计模式之原型模式
               </a>
             
           </div>
@@ -330,8 +346,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/19/Java多线程接口/" rel="prev" title="简单介绍多线程">
-                简单介绍多线程 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/26/Java设计模式之适配器模式/" rel="prev" title="Java设计模式之适配器模式">
+                Java设计模式之适配器模式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -384,8 +400,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -427,6 +452,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#单例模式适用环境"><span class="nav-number">1.</span> <span class="nav-text">单例模式适用环境</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

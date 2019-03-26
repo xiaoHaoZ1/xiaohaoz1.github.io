@@ -79,14 +79,17 @@
 
 
 
+<meta name="description" content="将一个类的接口转换成客户希望的另一个接口。适配器模式让那些接口不兼容的类可以工作。 Adapter Pattern：Convert the interface of a class into another interface clients except. Adapter lets  classes work together that couldn’t otherwise because o">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构与问题求解之递归">
-<meta property="og:url" content="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/index.html">
+<meta property="og:title" content="Java设计模式之适配器模式">
+<meta property="og:url" content="http://yoursite.com/2019/03/26/Java设计模式之适配器模式/index.html">
 <meta property="og:site_name" content="欢迎光临永昊的Blog">
+<meta property="og:description" content="将一个类的接口转换成客户希望的另一个接口。适配器模式让那些接口不兼容的类可以工作。 Adapter Pattern：Convert the interface of a class into another interface clients except. Adapter lets  classes work together that couldn’t otherwise because o">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-19T07:21:34.261Z">
+<meta property="og:updated_time" content="2019-03-26T13:31:38.495Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构与问题求解之递归">
+<meta name="twitter:title" content="Java设计模式之适配器模式">
+<meta name="twitter:description" content="将一个类的接口转换成客户希望的另一个接口。适配器模式让那些接口不兼容的类可以工作。 Adapter Pattern：Convert the interface of a class into another interface clients except. Adapter lets  classes work together that couldn’t otherwise because o">
 
 
 
@@ -116,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/26/Java设计模式之适配器模式/">
 
 
 
 
 
-  <title>数据结构与问题求解之递归 | 欢迎光临永昊的Blog</title>
+  <title>Java设计模式之适配器模式 | 欢迎光临永昊的Blog</title>
   
 
 
@@ -229,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/数据结构与问题求解之递归/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/26/Java设计模式之适配器模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -246,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据结构与问题求解之递归</h1>
+          <h1 class="post-title" itemprop="name headline">Java设计模式之适配器模式</h1>
         
 
         <div class="post-meta">
@@ -258,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-19T15:21:34+08:00">
-                2019-03-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-26T21:02:53+08:00">
+                2019-03-26
               </time>
             
 
@@ -296,7 +299,24 @@
       
 
       
-        
+        <blockquote>
+<p>将一个类的接口转换成客户希望的另一个接口。适配器模式让那些接口不兼容的类可以工作。</p>
+<p>Adapter Pattern：Convert the interface of a class into another interface clients except. Adapter lets</p>
+<p> classes work together that couldn’t otherwise because of incompatible interfaces.</p>
+</blockquote>
+<p>适配器模式包含以下3个角色</p>
+<ol>
+<li><p>Targe(目标抽象类)</p>
+<p>目标抽象类定义客户所需的接口，可以是一个抽象类或接口，也可以是具体类。在类适配器中，由于Java语言不支持多重继承，它只能是接口。</p>
+</li>
+<li><p>Adapter(适配器类)</p>
+<p>它可以调用另一个接口，作为一个转换器，对Adaptee和Target进行适配。适配器Adapter是适配器模式的核心，在类适配器中，它通过实现Target接口并继承Adaptee类来使二者产生联系，在对象适配器中，他通过继承Target并关联一个Adaptee对象使二者产生联系。</p>
+</li>
+<li><p>Adaptee(适配者类)</p>
+<p>适配者即被适配的角色，它定义了一个已经存在的接口，这个接口需要适配，适配者类一般是一个具体类，包含了客户希望使用的业务方法，在某些情况下没有适配者类的源代码。</p>
+</li>
+</ol>
+
       
     </div>
     
@@ -320,8 +340,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/17/随笔/" rel="next" title="317随笔">
-                <i class="fa fa-chevron-left"></i> 317随笔
+              <a href="/2019/03/26/Java设计模式之单例模式/" rel="next" title="Java设计模式之单例模式">
+                <i class="fa fa-chevron-left"></i> Java设计模式之单例模式
               </a>
             
           </div>
@@ -329,10 +349,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/19/Java多线程接口/" rel="prev" title="简单介绍多线程">
-                简单介绍多线程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
