@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="面向对象设计原则小结：  单一职责原则要求在软件系统中一个对象只包含单一的职责，并且该职责被完整地封装在一个类中。 开闭原则要求软件实体应当对扩展开放，多修改关闭。 开闭原则就是指软件实体应尽量在不修改原有代码的情况下进行扩展。这当然是我们的期望，每次修改源代码重新启动客户端肯定是相当麻烦的事。   里氏代换原则可以通俗表述为在软件中所有引用基类的地方必须能透明地使用其子类的对象。 依赖倒转原则要">
+<meta name="description" content="​    虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池定位到一个类的符号引用，并且检查这个符号引用代表的类是否已经被加载、解析和初始化。 ​    在类加载检查通过后，虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。 ​    内存分配完成后，虚拟机需要将分配到内存的空间都初始化为零值（不包括对象头）。这一步操作保证了对象的实例字段在Java代码中">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java设计模式第二章随笔">
-<meta property="og:url" content="http://yoursite.com/2019/03/23/Java设计模式第二章随笔/index.html">
+<meta property="og:title" content="深入Java理解虚拟机之Java对象的创建">
+<meta property="og:url" content="http://yoursite.com/2019/03/27/深入理解虚拟机之Java对象的创建/index.html">
 <meta property="og:site_name" content="欢迎光临永昊的Blog">
-<meta property="og:description" content="面向对象设计原则小结：  单一职责原则要求在软件系统中一个对象只包含单一的职责，并且该职责被完整地封装在一个类中。 开闭原则要求软件实体应当对扩展开放，多修改关闭。 开闭原则就是指软件实体应尽量在不修改原有代码的情况下进行扩展。这当然是我们的期望，每次修改源代码重新启动客户端肯定是相当麻烦的事。   里氏代换原则可以通俗表述为在软件中所有引用基类的地方必须能透明地使用其子类的对象。 依赖倒转原则要">
+<meta property="og:description" content="​    虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池定位到一个类的符号引用，并且检查这个符号引用代表的类是否已经被加载、解析和初始化。 ​    在类加载检查通过后，虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。 ​    内存分配完成后，虚拟机需要将分配到内存的空间都初始化为零值（不包括对象头）。这一步操作保证了对象的实例字段在Java代码中">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-23T14:59:38.957Z">
+<meta property="og:updated_time" content="2019-03-27T15:09:33.452Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java设计模式第二章随笔">
-<meta name="twitter:description" content="面向对象设计原则小结：  单一职责原则要求在软件系统中一个对象只包含单一的职责，并且该职责被完整地封装在一个类中。 开闭原则要求软件实体应当对扩展开放，多修改关闭。 开闭原则就是指软件实体应尽量在不修改原有代码的情况下进行扩展。这当然是我们的期望，每次修改源代码重新启动客户端肯定是相当麻烦的事。   里氏代换原则可以通俗表述为在软件中所有引用基类的地方必须能透明地使用其子类的对象。 依赖倒转原则要">
+<meta name="twitter:title" content="深入Java理解虚拟机之Java对象的创建">
+<meta name="twitter:description" content="​    虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池定位到一个类的符号引用，并且检查这个符号引用代表的类是否已经被加载、解析和初始化。 ​    在类加载检查通过后，虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。 ​    内存分配完成后，虚拟机需要将分配到内存的空间都初始化为零值（不包括对象头）。这一步操作保证了对象的实例字段在Java代码中">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/23/Java设计模式第二章随笔/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/27/深入理解虚拟机之Java对象的创建/">
 
 
 
 
 
-  <title>Java设计模式第二章随笔 | 欢迎光临永昊的Blog</title>
+  <title>深入Java理解虚拟机之Java对象的创建 | 欢迎光临永昊的Blog</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/23/Java设计模式第二章随笔/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/27/深入理解虚拟机之Java对象的创建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java设计模式第二章随笔</h1>
+          <h1 class="post-title" itemprop="name headline">深入Java理解虚拟机之Java对象的创建</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-23T21:49:56+08:00">
-                2019-03-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-27T22:57:42+08:00">
+                2019-03-27
               </time>
             
 
@@ -299,19 +299,11 @@
       
 
       
-        <h2 id="面向对象设计原则"><a href="#面向对象设计原则" class="headerlink" title="面向对象设计原则"></a>面向对象设计原则</h2><p>小结：</p>
-<ul>
-<li>单一职责原则要求在软件系统中一个对象只包含单一的职责，并且该职责被完整地封装在一个类中。</li>
-<li>开闭原则要求软件实体应当对扩展开放，多修改关闭。<ul>
-<li>开闭原则就是指软件实体应尽量在不修改原有代码的情况下进行扩展。这当然是我们的期望，每次修改源代码重新启动客户端肯定是相当麻烦的事。</li>
-</ul>
-</li>
-<li>里氏代换原则可以通俗表述为在软件中所有引用基类的地方必须能透明地使用其子类的对象。</li>
-<li>依赖倒转原则要求高层模块不应该依赖底层模块，它们都应该依赖抽象。抽象不应该依赖于细节，细节应该依赖于抽象。</li>
-<li>接口隔离原则要求客户端不应该依赖哪些它不要的接口。</li>
-<li>合成复用原则要求优先使用对象组合，而不是通过继承来达到复用的目的。</li>
-<li>迪米特法则要求每一个软件单位对其他单位都只有最少的只是，而且局限于哪些本单位密切相关的软件单位。</li>
-</ul>
+        <p>​    虚拟机遇到一条new指令时，首先将去检查这个指令的参数是否能在常量池定位到一个类的符号引用，并且检查这个符号引用代表的类是否已经被加载、解析和初始化。</p>
+<p>​    在类加载检查通过后，虚拟机将为新生对象分配内存。对象所需内存的大小在类加载完成后便可完全确定。</p>
+<p>​    内存分配完成后，虚拟机需要将分配到内存的空间都初始化为零值（不包括对象头）。这一步操作保证了对象的实例字段在Java代码中客户以不赋初值就直接使用。</p>
+<p>​    接下来，虚拟机要对对象进行必要的设置，例如这个对象是哪个类的实例、如何才能找到类的元数据信息、对象的哈希码、对象的GC分代年龄等信息。这些信息存放在对象的对象头之中。</p>
+<p>​    上面工作完成后，从虚拟机视角来看，一个新的对象已经产生了。但从Java程序的视角来看，对象创建才刚刚开始，<init>方法还没有执行，所有的字段都还是零。所以，一般来说(由字节码中是否随invokespecial指令所决定)，执行new指令之后会接着执行<init>方法，把对象按照程序员的意愿进行初始化，这样一个真正可用的对象才算完全产生出来。</init></init></p>
 
       
     </div>
@@ -336,8 +328,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/21/软件模式第一章随笔/" rel="next" title="软件模式第一章随笔">
-                <i class="fa fa-chevron-left"></i> 软件模式第一章随笔
+              <a href="/2019/03/26/Java设计模式之适配器模式/" rel="next" title="Java设计模式之适配器模式">
+                <i class="fa fa-chevron-left"></i> Java设计模式之适配器模式
               </a>
             
           </div>
@@ -345,10 +337,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/23/Java设计模式第三章随笔/" rel="prev" title="Java设计模式第三章随笔">
-                Java设计模式第三章随笔 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -400,17 +388,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -452,22 +431,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象设计原则"><span class="nav-number">1.</span> <span class="nav-text">面向对象设计原则</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
