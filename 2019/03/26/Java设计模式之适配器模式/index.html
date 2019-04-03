@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="欢迎光临永昊的Blog">
 <meta property="og:description" content="将一个类的接口转换成客户希望的另一个接口。适配器模式让那些接口不兼容的类可以工作。 Adapter Pattern：Convert the interface of a class into another interface clients except. Adapter lets  classes work together that couldn’t otherwise because o">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-02T13:44:17.884Z">
+<meta property="og:updated_time" content="2019-04-03T14:37:21.834Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java设计模式之适配器模式">
 <meta name="twitter:description" content="将一个类的接口转换成客户希望的另一个接口。适配器模式让那些接口不兼容的类可以工作。 Adapter Pattern：Convert the interface of a class into another interface clients except. Adapter lets  classes work together that couldn’t otherwise because o">
@@ -324,6 +324,16 @@
 <p>缺省适配器(Default Adapter Pattern)：当不需要实现一个接口提供的所有方法时，可先设计一个抽象类实现该接口，并为借口中的每一个方法提供一个默认实现(空方法)，那么该抽象类的子类可以选择性地覆盖父类的某些方法来实现需求，它适用于不想使用一个接口中的所有方法的情况。又称为<strong>单接口适配器模式</strong>。</p>
 </blockquote>
 <p>书中给出的解释已经很清楚了，确实如果我们的被适配类只用来实现客户希望调用接口的一个或几个而不是全部的方法的话，没有必要实现接口所有方法。如果你反驳说，直接用实现接口，方法体为空不就行了吗，还至于在其中添加一个抽象类吗？这样说是可以，但是按照书中的做法，代码结构更加清晰，而且当再出现新的适配器的时候，好处就更加明显了。</p>
+<p>对象适配器的优点：</p>
+<p>(1)：一个对象适配器可以把不同的适配者适配到同一个目标。</p>
+<p>(2)：可以适配一个适配者的子类，由于适配器和适配者之间是关联关系，根据里式代换原则，适配者的子类也可通过该适配器进行适配。</p>
+<p>类适配器模式缺点：</p>
+<p>主要是因为Java语法设计的缘故</p>
+<p>1、一次最多只能适配一个适配者类 因为Java只允许单继承嘛</p>
+<p>2、适配者类不能为最终类，也是因为Java语法中最终类不能被继承</p>
+<p>3、类适配模式中的目标抽象类只能为接口，不能为类，其使用有一定的局限性。</p>
+<p>对象适配器模式的缺点：</p>
+<p>与类适配器模式相比，在该模式下要在适配器中置换适配者类的某些方法比较麻烦。如果一定要置换掉适配者类的一个或多个方法，可以先做一个适配者类的子类，将适配者类的方法置换掉，然后再把适配者类的子类当成真正的适配者进行适配，实现过程较为复杂。</p>
 
       
     </div>
@@ -437,7 +447,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
