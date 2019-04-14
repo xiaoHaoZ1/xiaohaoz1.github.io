@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="欢迎光临永昊的Blog">
 <meta property="og:description" content="​    如果系统中的某个类存在两个独立变化的维度，通过桥接模式可以将这两个维度分离出来，使两者可以独立扩展。桥接模式用一种巧妙的方式处理多层继承存在的问题，用抽象关联来取代传统的多层继承，将类之间的静态继承关系转换为动态的对象组合关系。 ​    在文中，作者举了这样的例子。说有大、中、小三个型号的画笔，能够绘制12种不同的颜色。如果画笔的类型是蜡笔，那么一个蜡笔对象只能有一种型号和颜色，需要有">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-07T14:51:17.376Z">
+<meta property="og:updated_time" content="2019-04-14T14:01:08.620Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java设计模式之桥接模式">
 <meta name="twitter:description" content="​    如果系统中的某个类存在两个独立变化的维度，通过桥接模式可以将这两个维度分离出来，使两者可以独立扩展。桥接模式用一种巧妙的方式处理多层继承存在的问题，用抽象关联来取代传统的多层继承，将类之间的静态继承关系转换为动态的对象组合关系。 ​    在文中，作者举了这样的例子。说有大、中、小三个型号的画笔，能够绘制12种不同的颜色。如果画笔的类型是蜡笔，那么一个蜡笔对象只能有一种型号和颜色，需要有">
@@ -303,7 +303,22 @@
 <p>​    在文中，作者举了这样的例子。说有大、中、小三个型号的画笔，能够绘制12种不同的颜色。如果画笔的类型是蜡笔，那么一个蜡笔对象只能有一种型号和颜色，需要有36个对象才能实现效果。如果画笔的类型是毛笔，只要提供三种型号的对象，还有十二种颜色即可。这样总共也才3+12=15个对象。这时如果再多一种型号呢？蜡笔要增加十二个对象，毛笔只要增加1个对象。如果多一种颜色，蜡笔也要三个，而毛笔也只是一个。</p>
 <p>​    通过分析了解，蜡笔中，型号和颜色两个不同的变化维度偶合在一起。无论是对颜色的扩展还是型号的扩展都势必会<strong>影响到另一个维度</strong>。但在毛笔中，颜色和型号实现了<strong>分离</strong>。桥接模式就是用来处理蜡笔这样的情况变成毛笔的。</p>
 <p>​    在桥接模式中，将两个独立变化的维度设计为两个独立的继承等级结构，而不是将两者耦合在一起形成多层继承结构。桥接模式在抽象层建立起一个抽象关联，该关联关系累死一条连接两个独立继承结构的桥。故名桥接模式。等看到结构图就明白了。所以说书上的每句话都要细细品读。</p>
-<p>​    在使用桥接模式时首先应该<strong>识别出一个类所具有的两个独立变化的维度，将它们设计为两个独立的继承等级结构，为两个维度提供抽象层并建立抽象耦合</strong>。通常情况下，将具有两个独立变化维度的类的一些普通业务方法和与之<strong>关系最密切</strong>的维度设计为<strong>“抽象类”层级结构</strong>，而将另一个维度设计为”实现类”层次结构。</p>
+<p>​    在使用桥接模式时首先应该<strong>识别出一个类所具有的两个独立变化的维度，将它们设计为两个独立的继承等级结构，为两个维度提供抽象层并建立抽象耦合</strong>。通常情况下，将具有两个独立变化维度的类的一些普通业务方法和与之<strong>关系最密切</strong>的维度设计为<strong>“抽象类”层级结构</strong>，而将另一个维度设计为”实现类”层次结构。某种意义上就是解耦了某个功能的抽象定义和具体实现，让其变成了两个相互独立的模块。</p>
+<p>从网上搜索了下，对于桥接模式使用的典型是JDBC的驱动程序。舒服了，这下学起来舒服了！</p>
+<p>JDBC是以统一方式访问数据库的API，它提供了<strong>独立于平台</strong>的数据库访问。意思是，我们不必为了访问Oracle数据库专门写一个程序，为了访问Sybase数据库又专门写一个程序。</p>
+<p>在实际操作的过程中，当需要连接某个数据库时，需要先添加数据库公司发布的jar包，如jdbc-mysql.jar，然后在使用时先加载Driver。</p>
+<blockquote>
+<p>Class.forName(“com.mysql.jdbc.Deiver”);</p>
+</blockquote>
+<p>然后通过DriverManager去获取连接：</p>
+<blockquote>
+<p>connection = (Connection) DriverManager.getConnection(url, username,password);</p>
+</blockquote>
+<p>这里的connection的定义依旧是java.sql的接口。我们在代码中依旧使用的是接口，只不过通过了最初的加载Driver让添加的jar包中的类成为了真正的实现。</p>
+<p>这里说一下为什么使用Class.forName方法，因为Class.forName可以直接加载类中的静态代码块，而ClassLoader只能将类填进JVM方法区，在Class.newInstance的时候才会加载类中的代码块，而我们需要的就是执行Driver类中的静态代码块：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span>&#123;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    DriverManager.registerDriver(<span class="keyword">new</span> Driver());</span><br><span class="line">  &#125; <span class="keyword">catch</span>(SQLException e)&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Can't register driver!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类在被Class.forName的时候就加载了这一块代码块，将Driver类本身的对象注册进DriverManager。</p>
+<p>未完待续。。。</p>
 
       
     </div>
