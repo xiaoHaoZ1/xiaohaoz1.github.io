@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="​    如果系统中的某个类存在两个独立变化的维度，通过桥接模式可以将这两个维度分离出来，使两者可以独立扩展。桥接模式用一种巧妙的方式处理多层继承存在的问题，用抽象关联来取代传统的多层继承，将类之间的静态继承关系转换为动态的对象组合关系。 ​    在文中，作者举了这样的例子。说有大、中、小三个型号的画笔，能够绘制12种不同的颜色。如果画笔的类型是蜡笔，那么一个蜡笔对象只能有一种型号和颜色，需要有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java设计模式之桥接模式">
+<meta property="og:url" content="http://xiaohaoz1.github.io/2019/04/03/Java设计模式之桥接模式/index.html">
+<meta property="og:site_name" content="梦想不大，有猫有她有个家。">
+<meta property="og:description" content="​    如果系统中的某个类存在两个独立变化的维度，通过桥接模式可以将这两个维度分离出来，使两者可以独立扩展。桥接模式用一种巧妙的方式处理多层继承存在的问题，用抽象关联来取代传统的多层继承，将类之间的静态继承关系转换为动态的对象组合关系。 ​    在文中，作者举了这样的例子。说有大、中、小三个型号的画笔，能够绘制12种不同的颜色。如果画笔的类型是蜡笔，那么一个蜡笔对象只能有一种型号和颜色，需要有">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-14T14:01:08.620Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java设计模式之桥接模式">
+<meta name="twitter:description" content="​    如果系统中的某个类存在两个独立变化的维度，通过桥接模式可以将这两个维度分离出来，使两者可以独立扩展。桥接模式用一种巧妙的方式处理多层继承存在的问题，用抽象关联来取代传统的多层继承，将类之间的静态继承关系转换为动态的对象组合关系。 ​    在文中，作者举了这样的例子。说有大、中、小三个型号的画笔，能够绘制12种不同的颜色。如果画笔的类型是蜡笔，那么一个蜡笔对象只能有一种型号和颜色，需要有">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xiaohaoz1.github.io/2019/04/03/Java设计模式之桥接模式/">
+
+
+
+
+
+  <title>Java设计模式之桥接模式 | 梦想不大，有猫有她有个家。</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">梦想不大，有猫有她有个家。</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">韩圆圆我爱你</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xiaohaoz1.github.io/2019/04/03/Java设计模式之桥接模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yangyh">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="梦想不大，有猫有她有个家。">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java设计模式之桥接模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-03T22:38:02+08:00">
+                2019-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>​    如果系统中的某个类存在两个独立变化的维度，通过桥接模式可以将这两个维度分离出来，使两者可以独立扩展。桥接模式用一种巧妙的方式处理多层继承存在的问题，用<strong>抽象关联</strong>来取代传统的多层继承，<strong>将类之间的静态继承关系转换为动态的对象组合关系</strong>。</p>
+<p>​    在文中，作者举了这样的例子。说有大、中、小三个型号的画笔，能够绘制12种不同的颜色。如果画笔的类型是蜡笔，那么一个蜡笔对象只能有一种型号和颜色，需要有36个对象才能实现效果。如果画笔的类型是毛笔，只要提供三种型号的对象，还有十二种颜色即可。这样总共也才3+12=15个对象。这时如果再多一种型号呢？蜡笔要增加十二个对象，毛笔只要增加1个对象。如果多一种颜色，蜡笔也要三个，而毛笔也只是一个。</p>
+<p>​    通过分析了解，蜡笔中，型号和颜色两个不同的变化维度偶合在一起。无论是对颜色的扩展还是型号的扩展都势必会<strong>影响到另一个维度</strong>。但在毛笔中，颜色和型号实现了<strong>分离</strong>。桥接模式就是用来处理蜡笔这样的情况变成毛笔的。</p>
+<p>​    在桥接模式中，将两个独立变化的维度设计为两个独立的继承等级结构，而不是将两者耦合在一起形成多层继承结构。桥接模式在抽象层建立起一个抽象关联，该关联关系累死一条连接两个独立继承结构的桥。故名桥接模式。等看到结构图就明白了。所以说书上的每句话都要细细品读。</p>
+<p>​    在使用桥接模式时首先应该<strong>识别出一个类所具有的两个独立变化的维度，将它们设计为两个独立的继承等级结构，为两个维度提供抽象层并建立抽象耦合</strong>。通常情况下，将具有两个独立变化维度的类的一些普通业务方法和与之<strong>关系最密切</strong>的维度设计为<strong>“抽象类”层级结构</strong>，而将另一个维度设计为”实现类”层次结构。某种意义上就是解耦了某个功能的抽象定义和具体实现，让其变成了两个相互独立的模块。</p>
+<p>从网上搜索了下，对于桥接模式使用的典型是JDBC的驱动程序。舒服了，这下学起来舒服了！</p>
+<p>JDBC是以统一方式访问数据库的API，它提供了<strong>独立于平台</strong>的数据库访问。意思是，我们不必为了访问Oracle数据库专门写一个程序，为了访问Sybase数据库又专门写一个程序。</p>
+<p>在实际操作的过程中，当需要连接某个数据库时，需要先添加数据库公司发布的jar包，如jdbc-mysql.jar，然后在使用时先加载Driver。</p>
+<blockquote>
+<p>Class.forName(“com.mysql.jdbc.Deiver”);</p>
+</blockquote>
+<p>然后通过DriverManager去获取连接：</p>
+<blockquote>
+<p>connection = (Connection) DriverManager.getConnection(url, username,password);</p>
+</blockquote>
+<p>这里的connection的定义依旧是java.sql的接口。我们在代码中依旧使用的是接口，只不过通过了最初的加载Driver让添加的jar包中的类成为了真正的实现。</p>
+<p>这里说一下为什么使用Class.forName方法，因为Class.forName可以直接加载类中的静态代码块，而ClassLoader只能将类填进JVM方法区，在Class.newInstance的时候才会加载类中的代码块，而我们需要的就是执行Driver类中的静态代码块：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span>&#123;</span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line">    DriverManager.registerDriver(<span class="keyword">new</span> Driver());</span><br><span class="line">  &#125; <span class="keyword">catch</span>(SQLException e)&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Can't register driver!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类在被Class.forName的时候就加载了这一块代码块，将Driver类本身的对象注册进DriverManager。</p>
+<p>未完待续。。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/27/深入理解虚拟机之Java对象的创建/" rel="next" title="深入Java理解虚拟机之Java对象的创建">
+                <i class="fa fa-chevron-left"></i> 深入Java理解虚拟机之Java对象的创建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/08/铜雀台赋/" rel="prev" title="铜雀台赋">
+                铜雀台赋 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="yangyh">
+          <p class="site-author-name" itemprop="name">yangyh</p>
+           
+              <p class="site-description motion-element" itemprop="description">永昊的私人博客，只有我最爱的人才能进来。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yangyh</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
